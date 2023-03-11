@@ -41,16 +41,15 @@ function getTheme(): [string, string[]] {
   let keys: string[] = Object.keys(themes);
   const key = keys[Math.floor(Math.random() * keys.length)];
   let words: string[] = themes[key].sort(() => Math.random() - 0.5);
-  return [key, words.slice(0, 5).map((el) => el.toLowerCase())];
+  return [key, words.slice(0, 5).map(el => el.toLowerCase())];
 }
 
 function createGame() {
-  const [currentGuess, setCurrentGuess] = createSignal("");
-  const [guesses, setGuesses] = createSignal([]);
+  let interval: NodeJS.Timeout;
+  const [currentGuess, setCurrentGuess] = createSignal<string>("");
+  const [guesses, setGuesses] = createSignal<any[]>([]);
   
   const _theme = getTheme();
-  let interval: NodeJS.Timeout;
-
   const [game, updateGame] = createStore<IGame>({
     theme: _theme[0], 
     words: _theme[1], 
@@ -66,24 +65,22 @@ function createGame() {
       author: game.nickname, 
       correct: game.words.includes(currentGuess().toLowerCase())
     }]);
-    setCurrentGuess("");
-    console.log(game.answereds);
     
     if(game.words.includes(currentGuess().toLowerCase())) {
-      updateGame("words", (prev) => {
+      updateGame("words", prev => {
         const copy: string[] = prev.slice();
         copy.splice(game.words.indexOf(currentGuess().toLowerCase()), 1);
         return copy;
       });
       updateGame("answereds", game.answereds + 1);
-      console.log(game.answereds);
     }
+    setCurrentGuess("");
   }
 
   onMount(() => {
     interval = setInterval(() => {
       if(!game.nickname) return;
-      else if(game.time > 0) updateGame("time", game.time - 1);
+      else if(game.time > 0) return updateGame("time", game.time - 1);
       else if(game.answereds === 5 || !game.time) {
         const _newTheme = getTheme();
         updateGame("theme", _newTheme[0]);

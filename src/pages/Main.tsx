@@ -1,4 +1,4 @@
-import { createSignal, For } from "solid-js";
+import { For } from "solid-js";
 import { Guess, IGuess } from "../components/Guess";
 
 export const Main = (props) => {
@@ -49,7 +49,7 @@ export const Main = (props) => {
               </svg>
             </button>
             <input placeholder="Digite seu palpite" value={props.currentGuess()} required
-              onInput={(ev) => props.setCurrentGuess(ev.currentTarget.value)} class="block w-full resize-none mx-1 p-2.5 text-sm text-gray-200 placeholder-gray-200 bg-neutral-800" 
+              onInput={ev => props.setCurrentGuess(ev.currentTarget.value)} class="block w-full resize-none mx-1 p-2.5 text-sm text-gray-200 placeholder-gray-200 bg-neutral-800" 
             ></input>
             <button type="submit" class="inline-flex justify-center p-2 text-white hover:bg-gray-500 rounded-full cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
