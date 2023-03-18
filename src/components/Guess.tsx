@@ -1,11 +1,6 @@
-export interface IGuess {
-  author: string;
-  guess: string;
-  correct: boolean;
-  system?: boolean;
-}
+import { IMessage } from "../utils";
 
-export const Guess = (props: IGuess) => {
+export const Guess = (props: IMessage) => {
   return (
     <div class="w-full text-left py-2">
       <div class="flex items-center">
@@ -17,7 +12,7 @@ export const Guess = (props: IGuess) => {
             {props.author}:
           </h4>
           <div class={`text-sm ${props.correct ? "text-lime-500" : "text-red-600"}`}>
-            {props.guess}
+            {props.message}
           </div>
         </div>
       </div>

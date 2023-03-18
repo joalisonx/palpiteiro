@@ -1,5 +1,6 @@
 import { For } from "solid-js";
-import { Guess, IGuess } from "../components/Guess";
+import { Guess } from "../components";
+import { IMessage } from "../utils";
 
 export const Main = (props) => {
   return (<>
@@ -14,12 +15,12 @@ export const Main = (props) => {
       <div class="flex flex-wrap justify-between items-center space-x-4 text-gray-300">
         <div class="inline-flex items-center">
           <span class="text-base font-medium whitespace-nowrap mx-2">
-            🕛 {props.game.time}
+            🕛 {new Date(props.game.time * 1000).toISOString().substring(14, 19)}
           </span>
         </div>
         <div class="flex items-center">
           <span class="text-base font-medium whitespace-nowrap mx-2">
-            ✅ {props.game.answereds}/5
+            ✅ {props.game.answereds.length}/5
           </span>
         </div>
         <div class="flex items-center">
@@ -33,8 +34,11 @@ export const Main = (props) => {
         Palpites
       </h3>
       <div class="h-[266px] overflow-y-auto">
-        <For each={props.guesses()}>{(guess: IGuess) => (
-          <Guess author={guess.author} guess={guess.guess} correct={guess.correct}/>
+        <For each={props.messages()}>{(message: IMessage) => (
+          message.author ?
+            <Guess message={message.message} author={message.author} correct={message.correct}/>
+          :
+            <p class="my-1.5 text-gray-200 text-center">⚠ {message.message}</p>
         )}</For>
       </div>
     </div>
@@ -49,7 +53,7 @@ export const Main = (props) => {
               </svg>
             </button>
             <input placeholder="Digite seu palpite" value={props.currentGuess()} required
-              onInput={ev => props.setCurrentGuess(ev.currentTarget.value)} class="block w-full resize-none mx-1 p-2.5 text-sm text-gray-200 placeholder-gray-200 bg-neutral-800" 
+              onInput={ev => props.setCurrentGuess(ev.currentTarget.value)} class="block w-full resize-none mx-1 p-2.5 text-sm bg-neutral-800 text-gray-200 placeholder-gray-200" 
             ></input>
             <button type="submit" class="inline-flex justify-center p-2 text-white hover:bg-gray-500 rounded-full cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">

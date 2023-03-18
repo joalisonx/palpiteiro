@@ -6,9 +6,9 @@ export const Auth = (props) => {
 
   const authenticate = (ev: SubmitEvent) => {
     ev.preventDefault();
-    if(nickname().length < 4 || nickname().length > 8) {
+    if(nickname().length < 4 || nickname().length > 10) {
       setNickname("");
-      return setError("O nickname deve ter entre 4 e 8 caracteres.");
+      return setError("O nickname deve ter entre 4 e 10 caracteres.");
     }
 
     props.updateGame("nickname", nickname());
@@ -21,7 +21,7 @@ export const Auth = (props) => {
       <div class="sm:flex-1">
         <label class="sr-only">Nickname</label>
         <input placeholder="Nickname" value={nickname()} required
-          onInput={ev => setNickname(ev.currentTarget.value)} class="w-full p-3 rounded-md bg-gray-800 placeholder-gray-400 focus:text-gray-400"
+          onInput={ev => setNickname(ev.currentTarget.value)} class="w-full p-3 rounded-md bg-gray-800 text-gray-400 placeholder-gray-400 focus:text-gray-400"
         />
         <Show when={error}>
           <p class="mt-2 text-sm text-red-500">{error()}</p>

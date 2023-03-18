@@ -5,20 +5,21 @@ import { Auth } from "./pages/Auth";
 import { createGame } from "./utils";
 
 const App: Component = () => {
-  const { game, updateGame, currentGuess, setCurrentGuess, guesses, addGuess } = createGame();
+  const { game, updateGame, currentGuess, setCurrentGuess, messages, addGuess } = createGame();
   
   return (
     <div class="flex flex-col justify-center antialiased min-h-screen p-4">
       <div class="h-full">
         <div class="relative max-w-[540px] mx-auto bg-neutral-900 shadow-lg rounded-lg">
           <Routes>
-            <Route path="/" element={!game.nickname ? <Auth updateGame={updateGame}/>: <Main 
-              game={game} currentGuess={currentGuess} 
-              setCurrentGuess={setCurrentGuess}
-              guesses={guesses} addGuess={addGuess}
-            />
-            }
-            />
+            <Route path="/" element={
+              !game.nickname ? 
+                <Auth updateGame={updateGame}/>
+              : 
+              <Main game={game} currentGuess={currentGuess} setCurrentGuess={setCurrentGuess} 
+                messages={messages} addGuess={addGuess}
+              />
+            }/>
           </Routes>
         </div>
       </div>
