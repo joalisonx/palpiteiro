@@ -33,12 +33,16 @@ function createGame() {
 
   const addGuess = (ev: SubmitEvent) => {
     ev.preventDefault();
+    if(game.answereds.includes(currentGuess().toLowerCase())) {
+      setMessages([...messages(), {message: `${currentGuess()} já foi descoberta.`}]);
+      return;
+    }
+    
     setMessages([...messages(), {
       message: currentGuess(), 
       author: game.nickname, 
       correct: game.words.includes(currentGuess().toLowerCase())
     }]);
-    
     if(game.words.includes(currentGuess().toLowerCase())) {
       updateGame("words", prev => {
         const copy: string[] = prev.slice();
@@ -59,6 +63,7 @@ function createGame() {
       if(!game.nickname) return;
       else if(game.time > 0) return updateGame("time", game.time - 1);
       else if(game.answereds.length === 5 || !game.time) {
+        setMessages([...messages(), {message: "Começando nova rodada..."}]);
         const _newTheme = getTheme();
         updateGame("theme", _newTheme[0]);
         updateGame("words", _newTheme[1]);

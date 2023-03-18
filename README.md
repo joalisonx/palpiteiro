@@ -8,7 +8,7 @@ Palpiteiro é um jogo de adivinhação de palavras criado com SolidJS e Tailwind
 3. ```npm run dev```
 
 # TODO 📜
-- [ ] Mensagens do sistema
+- [x] Mensagens do sistema
 - [ ] Prevenir temas de se repetirem
 - [ ] Ranking
 - [ ] Modo multiplayer
