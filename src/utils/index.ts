@@ -9,6 +9,7 @@ interface IGame {
   answereds: string[];
   time: number;
   guesses: string[];
+  lastThemes: string[];
 }
 
 interface IMessage {
@@ -28,7 +29,8 @@ function createGame() {
     words: _theme[1], 
     answereds: [], 
     time: 90, 
-    guesses: []
+    guesses: [],
+    lastThemes: [_theme[0]]
   });
 
   const addGuess = (ev: SubmitEvent) => {
@@ -63,12 +65,24 @@ function createGame() {
       if(!game.nickname) return;
       else if(game.time > 0) return updateGame("time", game.time - 1);
       else if(game.answereds.length === 5 || !game.time) {
+        let newTheme = getTheme();
+
+        if(game.lastThemes.includes(newTheme[0])) {
+          while(game.lastThemes.includes(newTheme[0])) {
+            newTheme = getTheme();
+          }
+        }
+
         setMessages([...messages(), {message: "Começando nova rodada..."}]);
-        const _newTheme = getTheme();
-        updateGame("theme", _newTheme[0]);
-        updateGame("words", _newTheme[1]);
+        updateGame("theme", newTheme[0]);
+        updateGame("words", newTheme[1]);
         updateGame("time", 90);
         updateGame("answereds", []);
+        updateGame("lastThemes", prev => {
+          const copy: string[] = prev.slice();
+          copy.push(_theme[0]);
+          return copy;
+        });
       }
     }, 1000);
   });
