@@ -11,9 +11,9 @@ export const Guess = (props: IMessage) => {
           <h4 class="text-base text-gray-200 font-semibold">
             {props.author}:
           </h4>
-          <div class={`text-sm ${props.correct ? "text-lime-500" : "text-red-600"}`}>
+          <p class={`text-sm ${props.correct ? "text-lime-500" : "text-red-600"}`}>
             {props.message}
-          </div>
+          </p>
         </div>
       </div>
     </div>

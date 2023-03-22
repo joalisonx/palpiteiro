@@ -21,7 +21,7 @@ export const Auth = (props) => {
       <div class="sm:flex-1">
         <label class="sr-only">Nickname</label>
         <input placeholder="Nickname" value={nickname()} required
-          onInput={ev => setNickname(ev.currentTarget.value)} class="w-full p-3 rounded-md bg-gray-800 text-gray-400 placeholder-gray-400 focus:text-gray-400"
+          onInput={ev => setNickname(ev.currentTarget.value)} class="w-full p-3 rounded-md bg-neutral-800 text-gray-400 placeholder-gray-400 focus:text-gray-400"
         />
         <Show when={error}>
           <p class="mt-2 text-sm text-red-500">{error()}</p>

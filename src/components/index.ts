@@ -1,3 +1,4 @@
 import { Guess } from "./Guess";
+import { RankingItem } from "./RankingItem";
 
-export { Guess };
+export { Guess, RankingItem };

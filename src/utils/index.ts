@@ -18,6 +18,11 @@ interface IMessage {
   correct?: boolean;
 }
 
+interface IRankingItem {
+  player: string;
+  points: number;
+}
+
 function createGame() {
   let interval: NodeJS.Timeout;
   const [currentGuess, setCurrentGuess] = createSignal<string>("");
@@ -97,6 +102,7 @@ function createGame() {
 export { createGame }; 
 export type {
   IGame,
-  IMessage
+  IMessage,
+  IRankingItem
 };
 

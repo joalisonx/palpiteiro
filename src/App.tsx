@@ -2,6 +2,7 @@ import { Component } from "solid-js";
 import { Routes, Route } from "@solidjs/router";
 import { Main } from "./pages/Main";
 import { Auth } from "./pages/Auth";
+import { Ranking } from "./pages/Ranking";
 import { createGame } from "./utils";
 
 const App: Component = () => {
@@ -20,6 +21,7 @@ const App: Component = () => {
                 messages={messages} addGuess={addGuess}
               />
             }/>
+            <Route path="/ranking" element={<Ranking/>}/>
           </Routes>
         </div>
       </div>
